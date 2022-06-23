@@ -1,0 +1,21 @@
+.task-list{
+    margin: 48px;
+    width: 40%;
+    height: 70vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    border-radius: 1em;
+    border: solid var(--light-blue) 1px;
+    background: var(--bg-box);
+
+    app-list-tasks{
+        width: 100%;
+    }
+}
+.lists{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}

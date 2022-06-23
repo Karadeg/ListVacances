@@ -1,1 +1,26 @@
 /* You can add global styles to this file, and also import other style files */
+:root{
+    --light-blue: #82d6ff;
+    --blue: #116adf;
+    --bg-color: whitesmoke;
+    --bg-box: white;
+}
+
+body{
+    margin: 0;
+    padding: 0;
+    background: var(--bg-color);
+}
+
+* {
+    font-family: Roboto, Helvetica, sans-serif;
+}
+.title{
+    margin-bottom: 0;
+}
+.highlight-title{
+    margin-top: 0;
+    font-size: 2rem;
+    font-weight: 700;
+    color: var(--blue);
+}

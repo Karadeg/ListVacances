@@ -1,0 +1,12 @@
+<div class="lists">
+    <div class="task-list">
+        <h2>Done</h2>
+        <img (click)="onContinue(true)" src="../../assets/add.png" width="30" alt="addDoneTask">
+        <app-list-tasks [doneList]="true"></app-list-tasks>
+    </div>
+    <div class="task-list">
+        <h2>To do</h2>
+        <img (click)="onContinue(false)" src="../../assets/add.png" width="30" alt="addToDoTask">
+        <app-list-tasks [doneList]="false"></app-list-tasks>
+    </div>
+</div>

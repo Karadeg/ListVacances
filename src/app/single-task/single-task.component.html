@@ -1,0 +1,11 @@
+<div [ngClass]="{ 'task-done': task.done}" class="single-task">
+    <div class="task-information">
+        <img *ngIf="task.done" width="30" src="../../assets/check-mark.png" alt="done">
+        <label [for]="task.name">{{task.name}}</label>
+        <input type="checkbox" [id]="task.name" [checked]="task.done">
+        <p *ngIf="task.user">{{ task.user.firstName }} {{ task.user.name | uppercase}}</p>
+    </div>
+    <div>
+        <img (click)="deleteTask(task)" class="delete" width="30" src="../../assets/delete.png" alt="delete">
+    </div>
+</div>

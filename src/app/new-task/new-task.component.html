@@ -19,23 +19,23 @@
                 <label for="user">Personne</label>
                 <input class="create-task-input" type="text" id="user" formControlName="user">
             </div>
+            <div *ngIf="taskPreview$ | async as task" class="preview">
+                <h2>Aperçue</h2>
+                <div [ngClass]="{ 'task-done': task.done}" class="single-task">
+                    <div class="task-information">
+                        <img *ngIf="task.done" width="30" src="../../assets/check-mark.png" alt="done">
+                        <label [for]="task.name">{{task.name}}</label>
+                        <input type="checkbox" [id]="task.name" [checked]="task.done">
+                        <p *ngIf="task.user">{{ task.user.firstName }} {{ task.user.name | uppercase}}</p>
+                    </div>
+                    <div>
+                        <img class="delete" width="30" src="../../assets/delete.png" alt="delete">
+                    </div>
+                </div>
+            </div>
             <div class="action-buttons">
                 <button type="submit" (click)="onSubmitForm()">Enregistrer</button>
             </div>
         </form>
-    </div>
-    <div *ngIf="taskPreview$ | async as task" class="preview">
-        <h2>Aperçue</h2>
-        <div [ngClass]="{ 'task-done': task.done}" class="single-task">
-            <div class="task-information">
-                <img *ngIf="task.done" width="30" src="../../assets/check-mark.png" alt="done">
-                <label [for]="task.name">{{task.name}}</label>
-                <input type="checkbox" [id]="task.name" [checked]="task.done">
-                <p *ngIf="task.user">{{ task.user.firstName }} {{ task.user.name | uppercase}}</p>
-            </div>
-            <div>
-                <img class="delete" width="30" src="../../assets/delete.png" alt="delete">
-            </div>
-        </div>
     </div>
 </div>

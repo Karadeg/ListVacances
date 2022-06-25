@@ -14,8 +14,4 @@ export class SingleTaskComponent implements OnInit{
 
   ngOnInit(): void {
   }
-
-  deleteTask(task: Task): void {
-    this.taskService.deleteTask(task);
-  }
 }

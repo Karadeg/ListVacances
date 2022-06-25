@@ -1,11 +1,13 @@
 <div [ngClass]="{ 'task-done': task.done}" class="single-task">
     <div class="task-information">
-        <img *ngIf="task.done" width="30" src="../../assets/check-mark.png" alt="done">
+        <svg *ngIf="task.done" xmlns="http://www.w3.org/2000/svg" version="1.0" width="20.000000pt" height="20.000000pt" viewBox="0 0 512.000000 512.000000" preserveAspectRatio="xMidYMid meet">
+            <g transform="translate(0.000000,512.000000) scale(0.100000,-0.100000)" fill="#FFF" stroke="none">
+                <path d="M2315 5109 c-800 -83 -1501 -518 -1927 -1196 -604 -961 -490 -2237 274 -3068 425 -462 951 -737 1583 -827 119 -17 512 -16 635 1 622 86 1148 360 1572 820 349 378 572 862 650 1406 17 118 17 512 0 630 -83 583 -321 1073 -715 1474 -404 411 -899 662 -1472 747 -123 18 -478 26 -600 13z m565 -354 c232 -35 439 -99 655 -205 663 -325 1108 -937 1222 -1680 24 -157 24 -463 0 -620 -73 -478 -274 -889 -601 -1228 -185 -192 -381 -335 -621 -452 -218 -107 -417 -169 -665 -207 -157 -24 -463 -24 -620 0 -476 73 -882 272 -1225 599 -303 289 -520 664 -619 1069 -45 185 -60 318 -60 529 0 211 14 340 60 529 155 635 588 1171 1179 1461 256 126 489 190 810 224 78 8 382 -4 485 -19z"/>
+                <path d="M3682 3394 c-18 -9 -354 -304 -748 -655 l-715 -638 -389 309 c-407 323 -418 329 -496 317 -43 -7 -99 -48 -119 -87 -19 -38 -19 -123 0 -161 14 -27 878 -729 934 -759 29 -15 104 -15 140 0 32 13 1583 1389 1614 1432 11 14 22 49 24 75 6 60 -21 120 -69 154 -42 30 -130 37 -176 13z"/>
+            </g>
+        </svg>
         <label [for]="task.name">{{task.name}}</label>
         <input type="checkbox" [id]="task.name" [checked]="task.done">
         <p *ngIf="task.user">{{ task.user.firstName }} {{ task.user.name | uppercase}}</p>
-    </div>
-    <div>
-        <img (click)="deleteTask(task)" class="delete" width="30" src="../../assets/delete.png" alt="delete">
     </div>
 </div>

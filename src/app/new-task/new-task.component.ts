@@ -35,8 +35,10 @@ export class NewTaskComponent implements OnInit {
   }
 
   onSubmitForm(): void {
-    this.taskService.addTask(this.taskForm.value);
-    this.router.navigateByUrl('/');
+    this.taskService.addTask(this.taskForm.value).pipe(
+      tap(() => this.router.navigateByUrl('/'))
+    ).subscribe();
+    
   }
 
 }

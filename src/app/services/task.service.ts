@@ -1,5 +1,6 @@
+import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
-import { Observable } from "rxjs";
+import { Observable, switchMap, map, tap } from "rxjs";
 import { Task } from "../models/task.model";
 import { User } from "../models/user.model";
 
@@ -7,29 +8,49 @@ import { User } from "../models/user.model";
     providedIn: 'root'
 })
 export class TaskService {
-    tasks: Task[] = [
-        new Task(1, "Tache 1", false, "desccription"),
-        new Task(2, "Tache 2", true, "description", new User(1, "Karadeg", "Daucé", "karak.dauce@gmail.com")),
-        new Task(3, "Tache 3", true, "description")
-    ]
+    tasks: Task[] = [];
 
-    getAllTasks(): Task[] {
-        return this.tasks;
+    constructor (private http: HttpClient) {}
+
+    getAllTasks(): Observable<Task[]> {
+        return this.http.get<Task[]>('http://localhost:9000/tasks');
     }
 
-    modifyDoneTask(task: Task): void {
-        this.tasks.find((taskArray) => {
-            taskArray.id === task.id ? taskArray.done = !taskArray.done : taskArray.done = taskArray.done;
-          });
+    getTaskById(taskId : number): Observable<Task> {
+        return this.http.get<Task>(`http://localhost:9000/task/${taskId}`);
     }
 
-    deleteTask(task:Task): void {
-        this.tasks.forEach((taskArray, index) => {
-            if (taskArray.id === task.id) this.tasks.splice(index, 1);
-        })
+    modifyDoneTask(taskId: number): Observable<Task> {
+        return this.getTaskById(taskId).pipe(
+            map(task => ({
+                ...task,
+                done: !task.done
+            })),
+            switchMap(updateTask => this.http.put<Task>(`http://localhost:9000/task/${taskId}`, updateTask))
+        );
     }
 
-    addTask(formValue: {name: string, description: string, done: boolean, user?: string}): void {
-        this.tasks.push(new Task(0, formValue.name, formValue.done, formValue.description, new User(0, "Tanguy", "Budor", 'tanguy.budor@gmail.com')));
+    deleteTask(taskId: number): Observable<Task> {
+        console.log(`http://localhost:9000/taskDelete/${taskId}`);
+        return this.getTaskById(taskId).pipe(
+            switchMap(() => this.http.delete<Task>(`http://localhost:9000/task/${taskId}`))
+        );
+    }
+
+    addTask(formValue: {name: string, description: string, done: boolean, user?: string}): Observable<Task> {
+        return this.getAllTasks().pipe(
+            map(tasks => [...tasks].sort((a,b) => a.id - b.id)),
+            map(sortedTasks => sortedTasks[sortedTasks.length - 1]),
+            map(previousTask => ({
+                ...formValue,
+                snaps: 0,
+                createdDate: new Date(),
+                id: previousTask.id + 1
+            })),
+            switchMap(newTask => this.http.post<Task>(
+                `http://localhost:9000/task`,
+                newTask)
+            )
+        )
     }
 }

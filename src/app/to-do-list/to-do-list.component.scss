@@ -1,18 +1,43 @@
-.task-list{
+.task-lists{
     margin: 48px;
     width: 40%;
     height: 70vh;
     display: flex;
     flex-direction: column;
     align-items: center;
+    overflow-y: scroll;
 
-    border-radius: 1em;
+    
+
+    border-radius: 1em 0.35em 0.35em 1em;
     border: solid var(--light-blue) 1px;
     background: var(--bg-box);
 
     app-list-tasks{
         width: 100%;
     }
+}
+/* width */
+::-webkit-scrollbar {
+    width: 10px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+    border-radius: 10px;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+    background: var(--light-blue); 
+    height: 90px;
+    border-radius: 10px;
+    transition: all 0.3s;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+    background: var(--blue); 
 }
 .lists{
     display: flex;
@@ -25,4 +50,23 @@
     align-items: center;
     justify-content: space-between;
     width: 95%;
+}
+.task-list{
+    width: 95%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+}
+.delete{
+    cursor: pointer;
+    transition: transform 0.3s;
+    color:red;
+}
+.delete:hover{
+    transform: scale(1.05);
+    filter: invert(30%) sepia(90%) saturate(6741%) hue-rotate(339deg) brightness(90%) contrast(120%);
+}
+app-single-task{
+    width: 100%;
 }
